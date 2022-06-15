@@ -53,6 +53,6 @@ class ChessGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def chess_game_params
-      params.require(:chess_game).permit(:black_player, :white_player, :winner)
+      params.require(:chess_game).permit(:black_player_id, :white_player_id, :winner_id)
     end
 end

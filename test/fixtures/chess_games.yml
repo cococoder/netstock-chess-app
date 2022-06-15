@@ -3,11 +3,11 @@
 # Table name: chess_games
 #
 #  id              :integer          not null, primary key
-#  winner          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  black_player_id :integer
 #  white_player_id :integer
+#  winner_id       :integer
 #
 
 one:

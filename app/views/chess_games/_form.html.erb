@@ -12,18 +12,18 @@
   <% end %>
 
   <div>
-    <%= form.label :black_player, style: "display: block" %>
-    <%= form.select :black_player, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Player (White pieces)" %>
+    <%= form.label :black_player_id, style: "display: block" %>
+    <%= form.select :black_player_id, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Player (White pieces)" %>
   </div>
 
   <div>
-    <%= form.label :white_player, style: "display: block" %>
-    <%= form.select :white_player, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Player (black pieces)" %>
+    <%= form.label :white_player_id, style: "display: block" %>
+    <%= form.select :white_player_id, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Player (black pieces)" %>
   </div>
 
   <div>
-    <%= form.label :winner, style: "display: block" %>
-    <%= form.select :winner, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Winner" %>
+    <%= form.label :winner_id, style: "display: block" %>
+    <%= form.select :winner_id, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Winner" %>
   </div>
 
   <div>

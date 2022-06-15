@@ -15,4 +15,7 @@ class Member < ApplicationRecord
   def fullname
     "#{first_name} #{surname}"
   end
+  def to_s
+    fullname
+  end
 end
