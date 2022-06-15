@@ -4,10 +4,13 @@ class LeaderBoard
   def initialize(members:)
     @members = members
   end
-  def rank ;end
 
   def first
     @members.first
+  end
+
+  def last
+    @members.last
   end
 end
 
@@ -22,7 +25,7 @@ class LeaderBoardTest <  ActiveSupport::TestCase
 
     #when
     leader_board = LeaderBoard.new(members: members)
-    leader_board.rank
+
 
     #then
     assert_equal(leader_board.first.rank,1)
@@ -34,7 +37,6 @@ class LeaderBoardTest <  ActiveSupport::TestCase
 
     #when
     leader_board = LeaderBoard.new(members: members)
-    leader_board.rank
 
     #then
     assert_equal(leader_board.last.rank,100)
