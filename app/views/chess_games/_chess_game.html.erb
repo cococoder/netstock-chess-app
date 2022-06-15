@@ -9,9 +9,15 @@
     <%= chess_game.white_player %>
   </p>
 
-  <p>
-    <strong>Winner:</strong>
-    <%= chess_game.winner %>
-  </p>
+  <% if chess_game.draw? %>
+    <p>Draw!</p>
+  <%else %>
+
+    <p>
+      <strong>Winner:</strong>
+      <%= chess_game.winner %>
+    </p>
+
+<% end %>
 
 </div>

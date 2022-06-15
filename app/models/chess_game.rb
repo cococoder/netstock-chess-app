@@ -3,6 +3,7 @@
 # Table name: chess_games
 #
 #  id              :integer          not null, primary key
+#  draw            :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  black_player_id :integer
@@ -12,9 +13,11 @@
 class ChessGame < ApplicationRecord
   validates :black_player_id, presence: true
   validates :white_player_id, presence: true
-  validates :winner_id, presence: true
+  validates :winner_id, presence: true, unless: ->{ self.draw == true}
   validate :player_cant_play_them_selves
-  validate :the_winner_has_to_be_one_of_the_players_selected
+  validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
+
+  after_create_commit :set_rank
 
   def player_cant_play_them_selves
     if black_player_id == white_player_id
@@ -31,5 +34,9 @@ class ChessGame < ApplicationRecord
 
   belongs_to :black_player, class_name: "Member", foreign_key: :black_player_id
   belongs_to :white_player, class_name: "Member", foreign_key: :white_player_id
-  belongs_to :winner, class_name: "Member", foreign_key: :winner_id
+  belongs_to :winner, class_name: "Member", foreign_key: :winner_id, optional: true
+
+  def set_rank
+
+  end
 end

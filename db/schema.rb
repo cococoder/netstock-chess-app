@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_15_222159) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_15_224335) do
   create_table "chess_games", force: :cascade do |t|
     t.integer "black_player_id"
     t.integer "white_player_id"
     t.integer "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "draw", default: false
   end
 
   create_table "members", force: :cascade do |t|

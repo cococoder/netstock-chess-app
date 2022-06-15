@@ -3,6 +3,7 @@
 # Table name: chess_games
 #
 #  id              :integer          not null, primary key
+#  draw            :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  black_player_id :integer
