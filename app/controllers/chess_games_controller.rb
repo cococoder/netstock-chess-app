@@ -22,6 +22,7 @@ class ChessGamesController < ApplicationController
   # POST /chess_games
   def create
     @chess_game = ChessGame.new(chess_game_params)
+    @chess_game.loser_id = [@chess_game.black_player_id,@chess_game.white_player_id ].reject {|id| id == @chess_game.winner_id}.first
 
     if @chess_game.save
       redirect_to @chess_game, notice: "Chess game was successfully created."
