@@ -1,14 +1,31 @@
-require 'minitest/autorun'
+require "test_helper"
 
-class LeaderBoardTest < Minitest::Test
-  def new_member_is_lowest_ranked_test
+class LeaderBoard
+  def initialize(members:)
+    @members = members
+  end
+  def rank ;end
 
-    #given
-
-    #when
-
-
-    #then
-
+  def first
+    @members.first
   end
 end
+
+class LeaderBoardTest <  ActiveSupport::TestCase
+  def test_100_mebers
+    assert_equal(Member.count,100)
+  end
+  def test_leader_board_first_is_ranked_1
+
+    #given
+    members = Member.all
+
+    #when
+    leader_board = LeaderBoard.new(members: members)
+    leader_board.rank
+
+    #then
+    assert_equal(leader_board.first.rank,1)
+  end
+end
+

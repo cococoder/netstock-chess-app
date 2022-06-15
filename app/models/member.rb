@@ -12,7 +12,7 @@
 #  updated_at    :datetime         not null
 #
 class Member < ApplicationRecord
-
+  default_scope { order(rank: :asc) }
   def fullname
     "#{first_name} #{surname}"
   end
