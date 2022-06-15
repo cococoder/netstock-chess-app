@@ -20,7 +20,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
       post members_url, params: { member: { date_of_birth: @member.date_of_birth, email_address: @member.email_address, first_name: @member.first_name, surname: @member.surname } }
     end
 
-    assert_redirected_to member_url(Member.first)
+    assert_redirected_to member_url(Member.last)
   end
 
   test "should show member" do

@@ -13,10 +13,20 @@
 #
 class Member < ApplicationRecord
   default_scope { order(rank: :asc) }
+  before_create :set_rank
+
   def fullname
     "#{first_name} #{surname}"
   end
   def to_s
     "#{fullname} - (#{rank.ordinalize}}"
+  end
+
+  def set_rank
+    if Member.last
+      self.rank = Member.last.rank + 1
+    else
+      self.rank = 1
+    end
   end
 end

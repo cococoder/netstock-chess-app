@@ -14,7 +14,6 @@
 <% for i in 1..100 %>
 member_<%=i%>:
     id: <%= i %>
-    rank: <%= i %>
     first_name: <%= Faker::Name.first_name%>
     surname: <%= Faker::Name.last_name%>
     email_address: <%=Faker::Internet.email%>
