@@ -29,6 +29,12 @@ class ChessGamesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "a player cant play them selves" do
+    assert_no_difference("ChessGame.count") do
+      post chess_games_url, params: { chess_game: { black_player_id: @chess_game.white_player_id, white_player_id: @chess_game.white_player_id, winner_id: @chess_game.winner_id } }
+    end
+  end
+
   test "should show chess_game" do
     get chess_game_url(@chess_game)
     assert_response :success
