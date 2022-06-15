@@ -6,7 +6,7 @@
 #  date_of_birth :string
 #  email_address :string
 #  first_name    :string
-#  rank          :integer
+#  rank          :integer          default(0)
 #  surname       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -17,6 +17,6 @@ class Member < ApplicationRecord
     "#{first_name} #{surname}"
   end
   def to_s
-    fullname
+    "#{fullname} - (#{rank.ordinalize}}"
   end
 end
