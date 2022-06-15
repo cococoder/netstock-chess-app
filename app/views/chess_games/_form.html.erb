@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :white_player, style: "display: block" %>
-    <%= form.select :black_player, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Player (black pieces)" %>
+    <%= form.select :white_player, Member.all.collect{|m| [m.fullname, m.id]}, prompt: "Choose Player (black pieces)" %>
   </div>
 
   <div>
