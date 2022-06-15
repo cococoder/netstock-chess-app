@@ -23,6 +23,12 @@ class ChessGamesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to chess_game_url(ChessGame.last)
   end
 
+  test "should not create chess_game if black_player,white_player or winnder not supplied" do
+    assert_no_difference("ChessGame.count") do
+      post chess_games_url, params: { chess_game: { black_player_id: nil, white_player_id: @chess_game.white_player_id, winner_id: @chess_game.winner_id } }
+    end
+  end
+
   test "should show chess_game" do
     get chess_game_url(@chess_game)
     assert_response :success
