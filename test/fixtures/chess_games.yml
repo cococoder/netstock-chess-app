@@ -11,11 +11,11 @@
 #
 
 one:
-  black_player_id: 1
-  white_player_id: 2
-  winner_id: 1
+  black_player_id: 1001
+  white_player_id: 1002
+  winner_id: 1002
 
 two:
-  black_player_id: 2
-  white_player_id: 1
-  winner_id: 2
+  black_player_id: 1002
+  white_player_id: 1001
+  winner_id: 1001
