@@ -12,13 +12,15 @@
 #
 
 one:
+  id: 1
   first_name: MyString
   surname: MyString
   email_address: MyString
-  date_of_birth: MyString
+  date_of_birth: 1970-01-01
 
 two:
+  id: 2
   first_name: MyString
   surname: MyString
   email_address: MyString
-  date_of_birth: MyString
+  date_of_birth: 1970-01-012

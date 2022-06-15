@@ -17,7 +17,7 @@ class ChessGamesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create chess_game" do
     assert_difference("ChessGame.count") do
-      post chess_games_url, params: { chess_game: { black_player: @chess_game.black_player, white_player: @chess_game.white_player, winner: @chess_game.winner } }
+      post chess_games_url, params: { chess_game: { black_player_id: @chess_game.black_player_id, white_player_id: @chess_game.white_player_id, winner_id: @chess_game.winner_id } }
     end
 
     assert_redirected_to chess_game_url(ChessGame.last)
@@ -34,7 +34,7 @@ class ChessGamesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update chess_game" do
-    patch chess_game_url(@chess_game), params: { chess_game: { black_player: @chess_game.black_player, white_player: @chess_game.white_player, winner: @chess_game.winner } }
+    patch chess_game_url(@chess_game), params: { chess_game: { black_player_id: @chess_game.black_player_id, white_player_id: @chess_game.white_player_id, winner_id: @chess_game.winner_id } }
     assert_redirected_to chess_game_url(@chess_game)
   end
 
