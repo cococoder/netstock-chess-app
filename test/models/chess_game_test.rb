@@ -53,4 +53,17 @@ class ChessGameTest < ActiveSupport::TestCase
     assert_equal 1, game.black_player.rank, "high ranked player should not move"
     assert_equal 9,game.white_player.rank, "lower ranked player should move up 1"
   end
+
+  test "draw when adjacent " do
+    higher_ranked_player = members(:member_1)
+    lower_ranked_player = members(:member_2)
+
+    game = ChessGame.create black_player: higher_ranked_player,
+                            white_player: lower_ranked_player,
+                            draw:true
+
+
+    assert_equal 1, game.black_player.rank, "high ranked player should not move"
+    assert_equal 2,game.white_player.rank, "lower ranked player should not move up 1"
+  end
 end

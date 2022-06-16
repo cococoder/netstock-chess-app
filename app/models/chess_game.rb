@@ -44,22 +44,30 @@ class ChessGame < ApplicationRecord
 
     if draw==true
       if self.black_player.ranked_higher_than? white_player
-        white_player.move_to(new_rank: white_player.rank - 1)
+        unless white_player.adjacent_to?(player: black_player)
+          white_player.move_to(new_rank: white_player.rank - 1)
+        end
       else
-        black_player.move_to(new_rank: black_player.rank - 1)
+        unless white_player.adjacent_to?(player: black_player)
+          black_player.move_to(new_rank: black_player.rank - 1)
+        end
       end
       return
+    else
+
+      if winner.ranked_higher_than? loser
+        puts "no change!"
+        return
+      end
+
+
+      loser.move_to(new_rank: loser.rank + 1)
+      winner_rank = ((winner.rank - loser.previous_rank)/2)
+      winner.move_to(new_rank:zero_index_adjust(winner_rank))
+
     end
 
-    if winner.ranked_higher_than? loser
-      puts "no change!"
-      return
-    end
 
-
-    loser.move_to(new_rank: loser.rank + 1)
-    winner_rank = ((winner.rank - loser.previous_rank)/2)
-    winner.move_to(new_rank:zero_index_adjust(winner_rank))
 
   end
 

@@ -25,9 +25,15 @@ class Member < ApplicationRecord
     "#{fullname} - (#{rank.ordinalize}}"
   end
 
+  def adjacent_to? player:
+    self.rank - player.rank * 1 == 1
+  end
+
+
   def ranked_higher_than? member
     self.rank < member.rank
   end
+
 
   def move_to new_rank:
     self.update previous_rank: self.rank
