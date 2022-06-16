@@ -1,28 +1,34 @@
 <div id="<%= dom_id chess_game %>">
-  <p>
-    <strong>Black player:</strong>
-    <%= chess_game.black_player %>
-  </p>
 
-  <p>
-    <strong>White player:</strong>
-    <%= chess_game.white_player %>
-  </p>
+  <div class="form-group">
+    <label>Black player</label>
+    <input type="text" value="<%= chess_game.black_player %>" readonly class="form-control" />
+  </div>
+
+ 
+  <div class="form-group">
+    <label>White player</label>
+    <input type="text" value="<%= chess_game.white_player %>" readonly class="form-control" />
+  </div>
 
   <% if chess_game.draw? %>
-    <p>Draw!</p>
+    <div class="form-group">
+      <label>Draw!</label>
+    </div>
   <%else %>
 
-    <p>
-      <strong>Winner:</strong>
-      <%= chess_game.winner %>
-    </p>
+    <div class="form-group">
+      <label>Winner</label>
+      <input type="text" value="<%= chess_game.winner %>" readonly class="form-control" />
+    </div>
 
-    <p>
-      <strong>Loser:</strong>
-      <%= chess_game.loser %>
-    </p>
+    <div class="form-group">
+      <label>Loser</label>
+      <input type="text" value="<%= chess_game.loser %>" readonly class="form-control" />
+    </div>
 
 <% end %>
+
+  
 
 </div>

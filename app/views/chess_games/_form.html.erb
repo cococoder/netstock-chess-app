@@ -1,4 +1,4 @@
-<%= form_with(model: chess_game) do |form| %>
+<%= form_with(model: chess_game, class: "bg-white p-2") do |form| %>
   <% if chess_game.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(chess_game.errors.count, "error") %> prohibited this chess_game from being saved:</h2>
@@ -11,28 +11,28 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-group">
     <%= form.label :black_player_id, style: "display: block" %>
-    <%= form.select :black_player_id, Member.all.collect{|m| [m.to_s, m.id]}, prompt: "Choose Player (White pieces)" %>
+    <%= form.select :black_player_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose Player (White pieces)"}, { class: 'form-control'} %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :white_player_id, style: "display: block" %>
-    <%= form.select :white_player_id, Member.all.collect{|m| [m.to_s, m.id]}, prompt: "Choose Player (black pieces)" %>
+    <%= form.select :white_player_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose Player (black pieces)"}, { class: 'form-control'} %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :winner_id, style: "display: block" %>
-    <%= form.select :winner_id, Member.all.collect{|m| [m.to_s, m.id]}, prompt: "Choose Winner" %>
+    <%= form.select :winner_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose winner"} , { class: 'form-control'} %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :draw, style: "display: block" %>
-    <%= form.check_box :draw %>
+    <%= form.check_box :draw, class: 'form-control' %>
   </div>
 
-
-  <div>
-    <%= form.submit %>
+  <div class="d-flex">
+    <%= form.submit :class => 'btn btn-primary'%>
+    <%= link_to "Back to chess games", chess_games_path, class: 'ml-1 btn btn-info' %>
   </div>
 <% end %>

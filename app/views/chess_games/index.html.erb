@@ -1,14 +1,34 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Chess games</h1>
-
-<div id="chess_games">
-  <% @chess_games.each do |chess_game| %>
-    <%= render chess_game %>
-    <p>
-      <%= link_to "Show this chess game", chess_game %>
-    </p>
-  <% end %>
+<!-- Content Row -->
+<div class="row px-2">
+  <div class="d-flex justify-content-between mb-2">
+    <!-- Page Heading -->
+    <%= render 'layouts/heading', title: 'Games' %>
+    <%= link_to "New chess game", new_chess_game_path, class: 'btn btn-primary' %>
+  </div>
+  <table class="table table-striped bg-white">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Black player</th>
+        <th scope="col">White player</th>
+        <th scope="col">Winner</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @chess_games.each_with_index do |chess_game,index| %>
+        <tr>
+          <th scope="row"><%= index + 1%></th>
+          <td><%= chess_game.black_player %></td>
+          <td><%= chess_game.white_player %></td>
+          <td class="text-success"><%= chess_game.winner %></td>
+          <td class="d-flex members-action">
+            <%= link_to chess_game do %>
+              <i class="fa-solid fa-eye"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New chess game", new_chess_game_path %>

@@ -1,10 +1,2 @@
-<h1>Editing chess game</h1>
-
+<%= render 'layouts/heading', title: 'Editing chess game', className: 'mb-2' %>
 <%= render "form", chess_game: @chess_game %>
-
-<br>
-
-<div>
-  <%= link_to "Show this chess game", @chess_game %> |
-  <%= link_to "Back to chess games", chess_games_path %>
-</div>

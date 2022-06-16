@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @chess_game %>
-
-<div>
-  <%= link_to "Edit this chess game", edit_chess_game_path(@chess_game) %> |
-  <%= link_to "Back to chess games", chess_games_path %>
-
-  <%= button_to "Destroy this chess game", @chess_game, method: :delete %>
+<%= render 'layouts/heading', title: 'Game info', className: 'mb-2' %>
+<div class="bg-white p-2 members-action">
+  <%= render @chess_game %>
+  <div class="d-flex">
+    <%= link_to "Edit this chess games", edit_chess_game_path(@chess_game), class: 'btn btn-primary' %>
+    <%= button_to @chess_game, method: :delete do %>
+      <a class="btn btn-danger">Delete this game</a>
+    <% end %>
+    <%= link_to "Back to chess games", chess_games_path, class: 'btn btn-info' %>
+  </div>
 </div>
