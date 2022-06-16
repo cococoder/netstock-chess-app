@@ -50,7 +50,10 @@ class ChessGame < ApplicationRecord
         return ranks
       else
         logger.info "loser ,moves 1 place down"
-        ranks.insert(loser, before: loser)
+
+        p loser.prev
+
+        ranks.insert loser, after: loser
         logger.info "winner ,moves to rank #{adjust_for_zero_index((winner.rank - loser.rank)/2)}"
       end
 

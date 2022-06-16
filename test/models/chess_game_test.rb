@@ -29,7 +29,6 @@ class ChessGameTest < ActiveSupport::TestCase
   end
 
   test "lower ranked player winning " do
-
     higher_ranked_player = members(:member_1)
     lower_ranked_player = members(:member_10)
 

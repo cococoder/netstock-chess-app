@@ -12,6 +12,7 @@
 #  updated_at    :datetime         not null
 #
 class Member < ApplicationRecord
+  include LinkedList::Conversions
 
   default_scope { order(rank: :asc) }
 
@@ -27,7 +28,10 @@ class Member < ApplicationRecord
   def ranked_higher_than? member
     self.rank < member.rank
   end
+
+
   private
+
   def set_rank
     if Member.last
       self.rank = Member.last.rank + 1
