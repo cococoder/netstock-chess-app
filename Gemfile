@@ -38,4 +38,4 @@ gem "faker", "~> 2.21"
 
 gem "annotate", "~> 3.2"
 
-
+gem "foreman", "~> 0.87.2"
