@@ -42,14 +42,25 @@ class ChessGame < ApplicationRecord
   def set_rank
     self.update loser_id: [self.black_player_id,self.white_player_id ].reject {|id| id == self.winner_id}.first
 
+    if draw==true
+      if self.black_player.ranked_higher_than? white_player
+        white_player.move_to(new_rank: white_player.rank - 1)
+      else
+        black_player.move_to(new_rank: black_player.rank - 1)
+      end
+      return
+    end
+
     if winner.ranked_higher_than? loser
       puts "no change!"
       return
     end
 
+
     loser.move_to(new_rank: loser.rank + 1)
     winner_rank = ((winner.rank - loser.previous_rank)/2)
     winner.move_to(new_rank:zero_index_adjust(winner_rank))
+
   end
 
   def zero_index_adjust(rank)
