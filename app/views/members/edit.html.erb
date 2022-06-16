@@ -1,3 +1,9 @@
-<!-- Page Heading -->
-<%= render 'layouts/heading', title: 'Editing members', className: 'mb-2' %>
+<div class="d-flex justify-content-between">
+  <%= render 'layouts/heading', title: 'Editing members', className: 'mb-2' %>
+  <div class="d-flex members-action">
+    <%= link_to members_path do %>
+      <span class="badge badge-pill badge-info px-2 py-1">Back</span>
+    <% end %>
+  </div>
+</div>
 <%= render "form", member: @member %>

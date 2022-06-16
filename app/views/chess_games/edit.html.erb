@@ -1,2 +1,9 @@
-<%= render 'layouts/heading', title: 'Editing chess game', className: 'mb-2' %>
+<div class="d-flex justify-content-between">
+  <%= render 'layouts/heading', title: 'Editing chess game', className: 'mb-2' %>
+  <div class="d-flex members-action">
+    <%= link_to chess_games_path do %>
+      <span class="badge badge-pill badge-info px-2 py-1">Back</span>
+    <% end %>
+  </div>
+</div>
 <%= render "form", chess_game: @chess_game %>
