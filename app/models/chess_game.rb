@@ -18,6 +18,8 @@ class ChessGame < ApplicationRecord
   validates :winner_id, presence: true, unless: ->{ self.draw == true}
   validate :player_cant_play_them_selves
   validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
+  after_create_commit :set_loser
+  after_create_commit :add_leader_board_changes
 
   def player_cant_play_them_selves
     if black_player_id == white_player_id
@@ -36,4 +38,10 @@ class ChessGame < ApplicationRecord
   belongs_to :white_player, class_name: "Member", foreign_key: :white_player_id
   belongs_to :winner, class_name: "Member", foreign_key: :winner_id, optional: true
   belongs_to :loser, class_name: "Member", foreign_key: :loser_id, optional: true
+  def set_loser
+    self.update loser_id: [self.black_player_id, self.white_player_id].reject { |id| id == self.winner_id }.first
+  end
+  def add_leader_board_changes
+
+  end
 end
