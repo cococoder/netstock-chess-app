@@ -40,22 +40,9 @@ class ChessGame < ApplicationRecord
   belongs_to :loser, class_name: "Member", foreign_key: :loser_id, optional: true
 
   def set_rank
-
     self.update loser_id: [self.black_player_id,self.white_player_id ].reject {|id| id == self.winner_id}.first
-
     current_ranking do |ranks|
 
-      if winner.ranked_higher_than? loser
-        logger.info "No change in ranking"
-        return ranks
-      else
-        logger.info "loser ,moves 1 place down"
-
-        p loser.prev
-
-        ranks.insert loser, after: loser
-        logger.info "winner ,moves to rank #{adjust_for_zero_index((winner.rank - loser.rank)/2)}"
-      end
 
       ranks
     end
@@ -64,7 +51,8 @@ class ChessGame < ApplicationRecord
   private
 
   def current_ranking
-    ranks = LinkedList::List.new
+
+    ranks = []
     Member.all.map { |m| ranks << m }
     updated_ranks = yield ranks
     updated_ranks.to_a.each_with_index do |m,rank|
