@@ -8,7 +8,7 @@
   <table class="table table-striped bg-white">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Rank</th>
         <th scope="col">First name</th>
         <th scope="col">Last name</th>
         <th scope="col">Email address</th>
@@ -19,7 +19,7 @@
     <tbody>
       <% @members.each_with_index do |member,index| %>
         <tr>
-          <th scope="row"><%= index + 1%></th>
+          <td><%= member.rank %></td>
           <td><%= member.first_name %></td>
           <td><%= member.surname %></td>
           <td><%= member.email_address %></td>

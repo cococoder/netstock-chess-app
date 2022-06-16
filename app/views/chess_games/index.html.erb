@@ -21,7 +21,17 @@
           <th scope="row"><%= index + 1%></th>
           <td><%= chess_game.black_player %></td>
           <td><%= chess_game.white_player %></td>
-          <td class="text-success"><%= chess_game.winner %></td>
+          <td>
+            <% if chess_game.draw? %>
+              <span class="text-dark">
+                Draw!
+              </span>
+            <% else %>
+              <span class="text-success">
+                <%= chess_game.winner %>
+              </span>
+            <% end %>
+          </td>
           <td class="d-flex members-action">
             <%= link_to chess_game do %>
               <i class="fa-solid fa-eye"></i>

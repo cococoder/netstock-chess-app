@@ -22,7 +22,7 @@ class Member < ApplicationRecord
     "#{first_name} #{surname}"
   end
   def to_s
-    "#{fullname} - (#{rank.ordinalize}}"
+    "#{fullname} - (#{rank.ordinalize})"
   end
 
   def adjacent_to? player:

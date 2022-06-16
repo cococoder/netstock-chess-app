@@ -13,12 +13,12 @@
 
   <div class="form-group">
     <%= form.label :black_player_id, style: "display: block" %>
-    <%= form.select :black_player_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose Player (White pieces)"}, { class: 'form-control'} %>
+    <%= form.select :black_player_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose Player (black pieces)"}, { class: 'form-control'} %>
   </div>
 
   <div class="form-group">
     <%= form.label :white_player_id, style: "display: block" %>
-    <%= form.select :white_player_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose Player (black pieces)"}, { class: 'form-control'} %>
+    <%= form.select :white_player_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose Player (white pieces)"}, { class: 'form-control'} %>
   </div>
 
   <div class="form-group">
@@ -26,9 +26,9 @@
     <%= form.select :winner_id, Member.all.collect{|m| [m.fullname, m.id]}, {prompt: "Choose winner"} , { class: 'form-control'} %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :draw, style: "display: block" %>
-    <%= form.check_box :draw, class: 'form-control' %>
+  <div class="form-check ml-1 mb-2">
+    <%= form.check_box :draw, class: 'form-check-input' %>
+    <%= form.label :draw, style: "display: block", class: "form-check-label", for: "draw" %>
   </div>
 
   <div class="d-flex">
