@@ -41,26 +41,18 @@ class ChessGame < ApplicationRecord
 
   def set_rank
     self.update loser_id: [self.black_player_id,self.white_player_id ].reject {|id| id == self.winner_id}.first
-    current_ranking do |ranks|
 
-
-      ranks
+    if winner.ranked_higher_than? loser
+      puts "no change!"
+      return
     end
+
+    loser.move_to(new_rank: loser.rank + 1)
+    winner_rank = ((winner.rank - loser.previous_rank)/2)
+    winner.move_to(new_rank:zero_index_adjust(winner_rank))
   end
 
-  private
-
-  def current_ranking
-
-    ranks = []
-    Member.all.map { |m| ranks << m }
-    updated_ranks = yield ranks
-    updated_ranks.to_a.each_with_index do |m,rank|
-      m.update rank: adjust_for_zero_index(rank)
-    end
-  end
-
-  def adjust_for_zero_index(rank)
+  def zero_index_adjust(rank)
     rank + 1
   end
 

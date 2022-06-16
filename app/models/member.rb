@@ -6,6 +6,7 @@
 #  date_of_birth :string
 #  email_address :string
 #  first_name    :string
+#  previous_rank :integer
 #  rank          :integer          default(0)
 #  surname       :string
 #  created_at    :datetime         not null
@@ -16,6 +17,7 @@ class Member < ApplicationRecord
 
   before_create :set_rank
 
+
   def fullname
     "#{first_name} #{surname}"
   end
@@ -25,6 +27,11 @@ class Member < ApplicationRecord
 
   def ranked_higher_than? member
     self.rank < member.rank
+  end
+
+  def move_to new_rank:
+    self.update previous_rank: self.rank
+    self.update rank: new_rank
   end
 
   private

@@ -6,6 +6,7 @@
 #  date_of_birth :string
 #  email_address :string
 #  first_name    :string
+#  previous_rank :integer
 #  rank          :integer          default(0)
 #  surname       :string
 #  created_at    :datetime         not null
