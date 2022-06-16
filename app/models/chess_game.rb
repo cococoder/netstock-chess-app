@@ -19,8 +19,6 @@ class ChessGame < ApplicationRecord
   validate :player_cant_play_them_selves
   validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
 
-  after_create_commit :set_rank
-
   def player_cant_play_them_selves
     if black_player_id == white_player_id
       errors.add(:black_player_id, "A player cant play them selves!")
@@ -38,29 +36,4 @@ class ChessGame < ApplicationRecord
   belongs_to :white_player, class_name: "Member", foreign_key: :white_player_id
   belongs_to :winner, class_name: "Member", foreign_key: :winner_id, optional: true
   belongs_to :loser, class_name: "Member", foreign_key: :loser_id, optional: true
-
-  def set_rank
-    rank_and_order do
-
-    end
-  end
-
-  def reorder_ranks
-    Member.all.to_a.each_with_index do |m,index|
-      m.update rank: zero_index_adjust(index)
-    end
-  end
-
-  def zero_index_adjust(rank)
-    rank + 1
-  end
-
-  private
-
-  def rank_and_order
-    self.update loser_id: [self.black_player_id, self.white_player_id].reject { |id| id == self.winner_id }.first
-    yield
-    reorder_ranks
-  end
-
 end
