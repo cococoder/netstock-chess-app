@@ -19,7 +19,7 @@ class ChessGame < ApplicationRecord
   validate :player_cant_play_them_selves
   validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
 
-  after_create_commit :set_rank
+  after_create_commit :set_rank,:reorder_ranks
 
   def player_cant_play_them_selves
     if black_player_id == white_player_id
@@ -43,6 +43,7 @@ class ChessGame < ApplicationRecord
     self.update loser_id: [self.black_player_id,self.white_player_id ].reject {|id| id == self.winner_id}.first
 
     if draw==true
+
       if self.black_player.ranked_higher_than? white_player
         unless white_player.adjacent_to?(player: black_player)
           white_player.move_to(new_rank: white_player.rank - 1)
@@ -52,23 +53,28 @@ class ChessGame < ApplicationRecord
           black_player.move_to(new_rank: black_player.rank - 1)
         end
       end
-      return
+
     else
 
       if winner.ranked_higher_than? loser
-        puts "no change!"
         return
       end
 
 
       loser.move_to(new_rank: loser.rank + 1)
-      winner_rank = ((winner.rank - loser.previous_rank)/2)
+      winner_rank = ((winner.rank - loser.rank)/2)
       winner.move_to(new_rank:zero_index_adjust(winner_rank))
 
     end
 
+    reorder_ranks
 
+  end
 
+  def reorder_ranks
+    Member.all.to_a.each_with_index do |m,index|
+      m.update rank: zero_index_adjust(index)
+    end
   end
 
   def zero_index_adjust(rank)
