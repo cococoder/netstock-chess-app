@@ -11,6 +11,7 @@
 #  white_player_id :integer
 #  winner_id       :integer
 #
+
 class ChessGame < ApplicationRecord
   validates :black_player_id, presence: true
   validates :white_player_id, presence: true
@@ -40,7 +41,9 @@ class ChessGame < ApplicationRecord
 
   def set_rank
     current_ranking do |ranks|
-      
+
+      if self.draw
+
     end
   end
 
