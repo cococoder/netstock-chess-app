@@ -1,0 +1,41 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <%= image_tag('logo.svg')%>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <%= link_to root_path, class:"nav-link" do %>
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        <% end %>
+    </li>
+    <!-- Nav Item - Members -->
+    <li class="nav-item active">                    
+        <%= link_to members_path, class:"nav-link" do %>
+          <i class="fa-solid fa-users"></i>
+            <span>Members</span>
+        <% end %>
+    </li>
+    <!-- Nav Item - Matches -->
+    <li class="nav-item active">
+        <%= link_to chess_games_path, class:"nav-link" do %>
+          <i class="fa-solid fa-chess-board"></i>
+            <span>Games</span>
+        <% end %>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
