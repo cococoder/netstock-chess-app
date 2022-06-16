@@ -19,7 +19,7 @@ class ChessGame < ApplicationRecord
   validate :player_cant_play_them_selves
   validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
 
-  after_create_commit :set_rank,:reorder_ranks
+  after_create_commit :set_rank
 
   def player_cant_play_them_selves
     if black_player_id == white_player_id
@@ -40,35 +40,16 @@ class ChessGame < ApplicationRecord
   belongs_to :loser, class_name: "Member", foreign_key: :loser_id, optional: true
 
   def set_rank
-    self.update loser_id: [self.black_player_id,self.white_player_id ].reject {|id| id == self.winner_id}.first
-
-    if draw==true
-
-      if self.black_player.ranked_higher_than? white_player
-        unless white_player.adjacent_to?(player: black_player)
-          white_player.move_to(new_rank: white_player.rank - 1)
-        end
-      else
-        unless white_player.adjacent_to?(player: black_player)
-          black_player.move_to(new_rank: black_player.rank - 1)
-        end
-      end
-
-    else
-
+    rank_and_order do
       if winner.ranked_higher_than? loser
-        return
+        new_rank = ((winner.rank - loser.rank)/2)
+        winner.move_to(new_rank: new_rank)
+        puts loser.rank
+        loser.demote!
+      else
+        raise NotImplementedError
       end
-
-
-      loser.move_to(new_rank: loser.rank + 1)
-      winner_rank = ((winner.rank - loser.rank)/2)
-      winner.move_to(new_rank:zero_index_adjust(winner_rank))
-
     end
-
-    reorder_ranks
-
   end
 
   def reorder_ranks
@@ -79,6 +60,14 @@ class ChessGame < ApplicationRecord
 
   def zero_index_adjust(rank)
     rank + 1
+  end
+
+  private
+
+  def rank_and_order
+    self.update loser_id: [self.black_player_id, self.white_player_id].reject { |id| id == self.winner_id }.first
+    yield
+    reorder_ranks
   end
 
 end

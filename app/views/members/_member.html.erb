@@ -1,8 +1,10 @@
 <div id="<%= dom_id member %>">
-  <div class="form-group">
-    <label>Rank</label>
-    <input type="text" value="<%= member.rank.ordinalize %>" readonly class="form-control" />
-  </div>
+  <h2><%= member.rank.ordinalize %></h2>
+  <h3><%= member.previous_rank.try(:ordinalize) %></h3>
+  <p>
+    <strong>First name:</strong>
+    <%= member.first_name %>
+  </p>
 
   <div class="form-group">
     <label>First name</label>

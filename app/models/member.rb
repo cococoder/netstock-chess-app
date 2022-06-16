@@ -30,8 +30,12 @@ class Member < ApplicationRecord
   end
 
 
+  def demote!
+    move_to new_rank: self.rank + 1
+  end
+
   def ranked_higher_than? member
-    self.rank < member.rank
+    self.rank > member.rank
   end
 
 
