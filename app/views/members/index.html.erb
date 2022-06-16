@@ -9,6 +9,7 @@
     <thead>
       <tr>
         <th scope="col">Rank</th>
+        <th scope="col">Games Played</th>
         <th scope="col">First name</th>
         <th scope="col">Last name</th>
         <th scope="col">Email address</th>
@@ -20,6 +21,7 @@
       <% @members.each_with_index do |member,index| %>
         <tr>
           <td><%= member.rank.ordinalize %></td>
+          <td><%= member.games.count%></td>
           <td><%= member.first_name %></td>
           <td><%= member.surname %></td>
           <td><%= member.email_address %></td>

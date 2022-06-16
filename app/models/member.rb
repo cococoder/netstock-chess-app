@@ -17,6 +17,12 @@ class Member < ApplicationRecord
 
   before_create :set_rank
 
+  def games
+    result = []
+    ChessGame.where(black_player_id: self.id).or(ChessGame.where(white_player_id:self.id)).each {|chess_game|result << chess_game}
+    result
+  end
+
 
   def fullname
     "#{first_name} #{surname}"
@@ -27,11 +33,6 @@ class Member < ApplicationRecord
 
   def adjacent_to? player:
     self.rank - player.rank * 1 == 1
-  end
-
-
-  def demote!
-    move_to new_rank: self.rank + 1
   end
 
   def ranked_higher_than? member
