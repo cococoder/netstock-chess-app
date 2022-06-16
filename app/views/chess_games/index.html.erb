@@ -33,8 +33,14 @@
             <% end %>
           </td>
           <td class="d-flex members-action">
-            <%= link_to chess_game do %>
-              <i class="fa-solid fa-eye"></i>
+             <%= link_to chess_game do %>
+              <i class="fa-solid fa-eye text-dark"></i>
+            <% end %>
+            <%= link_to edit_chess_game_path(chess_game) do %>
+              <i class="ml-2 fa-solid fa-pen-to-square text-dark"></i>
+            <% end %>
+            <%= button_to chess_game, method: :delete do %>
+              <i class="fa-solid fa-trash text-dark"></i>
             <% end %>
           </td>
         </tr>
