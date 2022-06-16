@@ -42,19 +42,25 @@ class ChessGame < ApplicationRecord
   def set_rank
     current_ranking do |ranks|
 
-      if self.draw
 
+
+      ranks
     end
   end
 
   private
 
   def current_ranking
-    ranks = {}
-    Member.all.map { |m| ranks[m.id] = m.rank }
-    yield ranks
-    ranks.each do |id, rank|
-      Member.find(id).update rank: rank
+    ranks = LinkedList::List.new
+    Member.all.map { |m| ranks << m }
+    updated_ranks = yield ranks
+    updated_ranks.to_a.each_with_index do |m,rank|
+      m.update rank: adjust_for_zero_index(rank)
     end
   end
+
+  def adjust_for_zero_index(rank)
+    rank + 1
+  end
+
 end
