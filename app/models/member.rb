@@ -12,7 +12,9 @@
 #  updated_at    :datetime         not null
 #
 class Member < ApplicationRecord
+
   default_scope { order(rank: :asc) }
+
   before_create :set_rank
 
   def fullname
@@ -22,6 +24,10 @@ class Member < ApplicationRecord
     "#{fullname} - (#{rank.ordinalize}}"
   end
 
+  def ranked_higher_than? member
+    self.rank < member.rank
+  end
+  private
   def set_rank
     if Member.last
       self.rank = Member.last.rank + 1

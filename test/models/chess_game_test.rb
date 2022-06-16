@@ -14,7 +14,17 @@
 require "test_helper"
 
 class ChessGameTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "higher player winning does not affect the rankings" do
+
+    higher_ranked_player = members(:member_1)
+    lower_ranked_player = members(:member_2)
+
+    ChessGame.create black_player: higher_ranked_player,
+                     white_player: lower_ranked_player,
+                     draw:false,
+                     winner: higher_ranked_player
+
+    assert higher_ranked_player.rank == 1
+    assert lower_ranked_player.rank == 2
+  end
 end
