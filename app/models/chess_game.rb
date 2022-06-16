@@ -41,14 +41,7 @@ class ChessGame < ApplicationRecord
 
   def set_rank
     rank_and_order do
-      if winner.ranked_higher_than? loser
-        new_rank = ((winner.rank - loser.rank)/2)
-        winner.move_to(new_rank: new_rank)
-        puts loser.rank
-        loser.demote!
-      else
-        raise NotImplementedError
-      end
+
     end
   end
 
