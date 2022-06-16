@@ -1,42 +1,44 @@
 <!-- Content Row -->
 <div class="row px-2">
-  <div class="d-flex justify-content-between mb-2">
+  <div class="d-flex justify-content-between align-middle mb-2">
     <!-- Page Heading -->
     <%= render 'layouts/heading', title: 'Members' %>
     <%= link_to "New member", new_member_path, class: 'btn btn-primary' %>
   </div>
-  <table class="table table-striped bg-white">
-    <thead>
-      <tr>
-        <th scope="col">Rank</th>
-        <th scope="col">First name</th>
-        <th scope="col">Last name</th>
-        <th scope="col">Email address</th>
-        <th scope="col">Date of birth</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @members.each_with_index do |member,index| %>
+  <div class="table-responsive">
+    <table class="table table-striped bg-white">
+      <thead>
         <tr>
-          <td><%= member.rank.ordinalize %></td>
-          <td><%= member.first_name %></td>
-          <td><%= member.surname %></td>
-          <td><%= member.email_address %></td>
-          <td><%= member.date_of_birth %></td>
-          <td class="d-flex members-action">
-            <%= link_to member do %>
-              <i class="fa-solid fa-eye text-dark"></i>
-            <% end %>
-            <%= link_to edit_member_path(member) do %>
-              <i class="ml-2 fa-solid fa-pen-to-square text-dark"></i>
-            <% end %>
-            <%= button_to member, method: :delete do %>
-              <i class="fa-solid fa-trash text-dark"></i>
-            <% end %>
-          </td>
+          <th scope="col">Rank</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col">Email address</th>
+          <th scope="col">Date of birth</th>
+          <th scope="col"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @members.each_with_index do |member,index| %>
+          <tr>
+            <td><%= member.rank.ordinalize %></td>
+            <td><%= member.first_name %></td>
+            <td><%= member.surname %></td>
+            <td><%= member.email_address %></td>
+            <td><%= member.date_of_birth %></td>
+            <td class="d-flex members-action">
+              <%= link_to member do %>
+                <i class="fa-solid fa-eye text-dark"></i>
+              <% end %>
+              <%= link_to edit_member_path(member) do %>
+                <i class="ml-2 fa-solid fa-pen-to-square text-dark"></i>
+              <% end %>
+              <%= button_to member, method: :delete do %>
+                <i class="fa-solid fa-trash text-dark"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
