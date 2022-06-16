@@ -39,14 +39,19 @@ class ChessGame < ApplicationRecord
   belongs_to :loser, class_name: "Member", foreign_key: :loser_id, optional: true
 
   def set_rank
-
-    if draw == true
-
-    else
-
-
-
+    current_ranking do |ranks|
+      
     end
+  end
 
+  private
+
+  def current_ranking
+    ranks = {}
+    Member.all.map { |m| ranks[m.id] = m.rank }
+    yield ranks
+    ranks.each do |id, rank|
+      Member.find(id).update rank: rank
+    end
   end
 end
