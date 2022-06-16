@@ -1,9 +1,2 @@
-<h1>New member</h1>
-
+<%= render 'layouts/heading', title: 'New member', className: 'mb-2' %>
 <%= render "form", member: @member %>
-
-<br>
-
-<div>
-  <%= link_to "Back to members", members_path %>
-</div>

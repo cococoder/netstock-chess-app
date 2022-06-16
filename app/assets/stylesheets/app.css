@@ -11267,3 +11267,12 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+.alert{
+  right: 1rem;
+  top: 5.5rem;
+  position: fixed;
+}
+.members-action button{
+  border: none !important;
+  background: transparent !important;
+}

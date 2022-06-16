@@ -55,6 +55,9 @@
       })(jQuery);
 
     </script>
+    <script>
+    $('#datepicker').datepicker({format: 'dd/mm/yyyy'});
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
@@ -65,10 +68,16 @@
       <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content-wrapper" class="d-flex flex-column position-relative">
 
           <!-- Main Content -->
           <div id="content">
+            <% if notice%>
+              <div class="w-25 alert alert-success" role="alert">
+                <%= notice %>
+              </div>
+            <% end %>
+
             <!-- Topbar -->
             <%= render 'layouts/topbar' %>
             <!-- End of Topbar -->

@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @member %>
-
-<div>
-  <%= link_to "Edit this member", edit_member_path(@member) %> |
-  <%= link_to "Back to members", members_path %>
-
-  <%= button_to "Destroy this member", @member, method: :delete %>
+<%= render 'layouts/heading', title: 'Member info', className: 'mb-2' %>
+<div class="bg-white p-2 members-action">
+  <%= render @member %>
+  <div class="d-flex">
+    <%= link_to "Edit this member", edit_member_path(@member), class: 'btn btn-primary' %>
+    <%= button_to @member, method: :delete do %>
+      <a class="btn btn-danger">Delete this members</a>
+    <% end %>
+    <%= link_to "Back to members", members_path, class: 'btn btn-info' %>
+  </div>
 </div>

@@ -1,23 +1,27 @@
 <div id="<%= dom_id member %>">
+  <div class="form-group">
+    <label>Rank</label>
+    <span><%= member.rank.ordinalize %></span>
+  </div>
+
   <h2><%= member.rank.ordinalize %></h2>
-  <p>
-    <strong>First name:</strong>
-    <%= member.first_name %>
-  </p>
+  <div class="form-group">
+    <label>First name</label>
+    <input type="text" value="<%= member.first_name %>" readonly class="form-control" />
+  </div>
 
-  <p>
-    <strong>Surname:</strong>
-    <%= member.surname %>
-  </p>
+  <div class="form-group">
+    <label>Last name</label>
+    <input type="text" value="<%= member.surname %>" readonly class="form-control" />
+  </div>
 
-  <p>
-    <strong>Email address:</strong>
-    <%= member.email_address %>
-  </p>
+  <div class="form-group">
+    <label>Email address</label>
+    <input type="text" value="<%= member.email_address %>" readonly class="form-control" />
+  </div>
 
-  <p>
-    <strong>Date of birth:</strong>
-    <%= member.date_of_birth %>
-  </p>
-
+  <div class="form-group">
+    <label>Date of birth</label>
+    <input type="text" value="<%= member.date_of_birth %>" readonly class="form-control" />
+  </div>
 </div>
