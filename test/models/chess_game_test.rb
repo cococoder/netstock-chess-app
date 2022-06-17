@@ -37,6 +37,17 @@ class ChessGameTest < ActiveSupport::TestCase
     assert_equal "1 > #{player_1.fullname} - (2nd) - 1st", player_1.to_s
   end
 
+  test 'draw - lower ranked moves up 1' do
+    game = chess_games(:draw)
+    game.change_rankings
+    lowest_rank_player = game.lowest_rank_player
+
+    Member.first(10).each{|m| puts m}
+
+    assert(lowest_rank_player.to_s.include? "- (4th) - 5th")
+
+  end
+
 
 
   test "LoweRankedWin 1 and 9" do

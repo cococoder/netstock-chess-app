@@ -43,6 +43,10 @@ class ChessGame < ApplicationRecord
     end
   end
 
+  def lowest_rank_player
+    return black_player if black_player.rank > white_player.rank
+    white_player
+  end
   belongs_to :black_player, class_name: "Member", foreign_key: :black_player_id
   belongs_to :white_player, class_name: "Member", foreign_key: :white_player_id
   belongs_to :winner, class_name: "Member", foreign_key: :winner_id, optional: true
@@ -52,6 +56,15 @@ class ChessGame < ApplicationRecord
   end
   def change_rankings
     set_loser
+
+    if draw == true
+
+      lowest_rank_player.premote!
+      Member.reorder_from lowest_rank_player
+
+      return
+    end
+
     if(winner.ranked_higher_than? loser)
       puts "No change!"
     else

@@ -34,7 +34,8 @@ high_rank_win:
 
 draw:
   black_player_id: 1
-  white_player_id: 2
+  white_player_id: 5
+  draw: true
 
 
 
