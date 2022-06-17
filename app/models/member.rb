@@ -37,7 +37,7 @@ class Member < ApplicationRecord
   end
 
   def ranked_higher_than? member
-    self.rank > member.rank
+    self.rank < member.rank
   end
 
   def premote!

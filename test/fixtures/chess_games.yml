@@ -18,6 +18,27 @@ one:
   winner_id: 1
 
 two:
+  black_player_id: 1
+  white_player_id: 2
+  winner_id: 2
+
+low_rank_win:
+  black_player_id: 1
+  white_player_id: 10
+  winner_id: 10
+
+high_rank_win:
+  black_player_id: 1
+  white_player_id: 2
+  winner_id: 1
+
+draw:
+  black_player_id: 1
+  white_player_id: 2
+
+
+
+draw_adjacent:
   black_player_id: 2
   white_player_id: 1
-  winner_id: 2
+  winner_id:

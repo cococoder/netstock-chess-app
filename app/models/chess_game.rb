@@ -13,12 +13,21 @@
 #
 
 class ChessGame < ApplicationRecord
+  class LoweRankedWin
+    def initialize(high_rank:,low_rank:)
+      @high_rank = high_rank
+      @low_rank = low_rank
+    end
+    def call
+      new_rank = (@low_rank - @high_rank)/2
+    end
+  end
   validates :black_player_id, presence: true
   validates :white_player_id, presence: true
   validates :winner_id, presence: true, unless: ->{ self.draw == true}
   validate :player_cant_play_them_selves
   validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
-  after_create_commit :set_loser
+
   after_create_commit :change_rankings
 
   def player_cant_play_them_selves
@@ -42,6 +51,24 @@ class ChessGame < ApplicationRecord
     self.update loser_id: [self.black_player_id, self.white_player_id].reject { |id| id == self.winner_id }.first
   end
   def change_rankings
+    set_loser
+    if(winner.ranked_higher_than? loser)
+      puts "No change!"
+    else
+      loser.demote!
+      Member.reorder_from loser,action: :demotion
 
+      new_rank = LoweRankedWin.new(high_rank: loser.rank,low_rank: winner.rank).call
+
+      if new_rank == 0
+        winner.premote!
+        Member.reorder_from winner
+      else
+        winner.move_to new_rank: new_rank
+        Member.reorder_from winner
+      end
+
+
+    end
   end
 end
