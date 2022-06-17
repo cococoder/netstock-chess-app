@@ -59,4 +59,38 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal previous_rank, current.adjacent_below
   end
 
+  test "self.reorder" do
+    member_5 = members(:member_5)
+    member_5.move_to new_rank: 2
+    Member.reorder_from member_5
+    member_2 = members(:member_2)
+    Member.first(10).each do |m|
+      puts m
+    end
+    assert(member_5.to_s.include? "- (2nd) - 5th")
+    assert(member_2.to_s.include? "- (3rd) - 2nd")
+  end
+
+  test "self.reorder from top" do
+    member_5 = members(:member_5)
+    member_5.move_to new_rank: 1
+    Member.reorder_from member_5
+    member_1 = members(:member_1)
+    Member.first(10).each do |m|
+      puts m
+    end
+    assert(member_5.to_s.include? "- (1st) - 5th")
+    assert(member_1.to_s.include? "- (2nd) - 1st")
+  end
+
+  test "self.reorder after promotion" do
+    member_5 = members(:member_5)
+    member_5.premote!
+    Member.reorder_from member_5
+    Member.first(10).each do |m|
+      puts m
+    end
+
+  end
+
 end

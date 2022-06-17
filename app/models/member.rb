@@ -29,7 +29,7 @@ class Member < ApplicationRecord
     "#{first_name} #{surname}"
   end
   def to_s
-    "#{fullname} - (#{rank.ordinalize})"
+    "#{self.id} > #{fullname} - (#{rank.ordinalize}) - #{previous_rank.try(:ordinalize)}"
   end
 
   def adjacent_to? player:
@@ -68,6 +68,15 @@ class Member < ApplicationRecord
 
   def record_rank_change
     RankChange.create member: self, previous: previous_rank, current: self.rank
+  end
+
+  def self.reorder_from context
+    Member.all.each do |m|
+      next if context.rank > m.rank
+      next if m == context
+      break if m.rank > context.previous_rank
+      m.demote!
+    end
   end
 
   private
