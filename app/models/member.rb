@@ -58,6 +58,14 @@ class Member < ApplicationRecord
     self == Member.last
   end
 
+  def adjacent_above
+    Member.find_by rank: self.rank - 1
+  end
+
+  def adjacent_below
+    Member.find_by rank: self.rank + 1
+  end
+
   def record_rank_change
     RankChange.create member: self, previous: previous_rank, current: self.rank
   end

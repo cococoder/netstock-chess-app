@@ -41,9 +41,22 @@ class MemberTest < ActiveSupport::TestCase
     member = members(:member_1)
     assert member.ranked_first?
   end
+
   test "ranked_last?" do
     member = members(:member_100)
     assert member.ranked_last?
+  end
+
+  test "adjacent_above" do
+    current = members(:member_2)
+    next_rank = members(:member_1)
+    assert_equal next_rank, current.adjacent_above
+  end
+
+  test "adjacent_below" do
+    current = members(:member_1)
+    previous_rank = members(:member_2)
+    assert_equal previous_rank, current.adjacent_below
   end
 
 end
