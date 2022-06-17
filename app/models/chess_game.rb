@@ -19,7 +19,7 @@ class ChessGame < ApplicationRecord
   validate :player_cant_play_them_selves
   validate :the_winner_has_to_be_one_of_the_players_selected, unless: ->{ self.draw == true}
   after_create_commit :set_loser
-  after_create_commit :add_leader_board_changes
+  after_create_commit :change_rankings
 
   def player_cant_play_them_selves
     if black_player_id == white_player_id
@@ -41,7 +41,7 @@ class ChessGame < ApplicationRecord
   def set_loser
     self.update loser_id: [self.black_player_id, self.white_player_id].reject { |id| id == self.winner_id }.first
   end
-  def add_leader_board_changes
+  def change_rankings
 
   end
 end

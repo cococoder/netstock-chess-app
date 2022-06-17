@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_16_225941) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_17_032630) do
   create_table "chess_games", force: :cascade do |t|
     t.integer "black_player_id"
     t.integer "white_player_id"
@@ -19,15 +19,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_225941) do
     t.datetime "updated_at", null: false
     t.boolean "draw", default: false
     t.integer "loser_id"
-  end
-
-  create_table "leader_board_changes", force: :cascade do |t|
-    t.integer "member_id", null: false
-    t.integer "from"
-    t.integer "to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_leader_board_changes_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -41,5 +32,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_225941) do
     t.integer "previous_rank"
   end
 
-  add_foreign_key "leader_board_changes", "members"
+  create_table "rank_changes", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "previous"
+    t.integer "current"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_rank_changes_on_member_id"
+  end
+
+  add_foreign_key "rank_changes", "members"
 end

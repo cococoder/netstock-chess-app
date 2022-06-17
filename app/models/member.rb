@@ -16,7 +16,7 @@ class Member < ApplicationRecord
   default_scope { order(rank: :asc) }
 
   before_create :set_rank
-  after_save :add_leader_board_change
+  after_save :record_rank_change
 
   def games
     result = []
@@ -50,8 +50,8 @@ class Member < ApplicationRecord
     self.update previous_rank: self.rank, rank: new_rank
   end
 
-  def add_leader_board_change
-    LeaderBoardChange.create member: self, from: previous_rank, to: self.rank
+  def record_rank_change
+    RankChange.create member: self, previous: previous_rank, current: self.rank
   end
 
   private

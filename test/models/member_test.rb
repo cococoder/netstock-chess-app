@@ -15,7 +15,26 @@
 require "test_helper"
 
 class MemberTest < ActiveSupport::TestCase
-  test "the truth" do
-    assert true
+  test "premote!" do
+
+    member = members(:member_2)
+    member.premote!
+    assert_equal 2,member.previous_rank
+    assert_equal 1,member.rank
+  end
+  test "demote!" do
+
+    member = members(:member_2)
+    member.demote!
+    assert_equal 2,member.previous_rank
+    assert_equal 3,member.rank
+  end
+
+  test "move to rank!" do
+
+    member = members(:member_3)
+    member.move_to new_rank: 1
+    assert_equal 3,member.previous_rank
+    assert_equal 1,member.rank
   end
 end
