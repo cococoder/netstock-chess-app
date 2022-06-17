@@ -87,10 +87,31 @@ class MemberTest < ActiveSupport::TestCase
     member_5 = members(:member_5)
     member_5.premote!
     Member.reorder_from member_5
+
+    member_4 = members(:member_4)
+    member_6 = members(:member_6)
+
+    assert(member_5.to_s.include? "- (4th) - 5th")
+    assert(member_4.to_s.include? "- (5th) - 4th")
+    assert(member_6.to_s.include? "- (6th) - ")
+
+  end
+
+  test "self.reorder after demotion" do
+    member_5 = members(:member_5)
+    member_5.demote!
+    Member.reorder_from member_5, action: :demotion
+
+
+    member_6 = members(:member_6)
     Member.first(10).each do |m|
       puts m
     end
 
+    assert(member_5.to_s.include? "- (6th) - 5th")
+    assert(member_6.to_s.include? "- (5th) - 6th")
+
   end
+
 
 end

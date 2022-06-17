@@ -45,6 +45,7 @@ class Member < ApplicationRecord
   end
   def demote!
     move_to new_rank: self.rank + 1
+
   end
   def move_to new_rank:
     self.update previous_rank: self.rank, rank: new_rank
@@ -70,7 +71,14 @@ class Member < ApplicationRecord
     RankChange.create member: self, previous: previous_rank, current: self.rank
   end
 
-  def self.reorder_from context
+  def self.reorder_from context, action: :pomotion
+    promoting(context) if action == :pomotion
+    demoting(context) if action == :demotion
+  end
+
+  private
+
+  def self.promoting(context)
     Member.all.each do |m|
       next if context.rank > m.rank
       next if m == context
@@ -78,8 +86,14 @@ class Member < ApplicationRecord
       m.demote!
     end
   end
-
-  private
+  def self.demoting(context)
+    Member.all.each do |m|
+      next if context.rank > m.rank
+      next if m == context
+      break if m.rank > context.rank
+      m.premote!
+    end
+  end
 
   def set_rank
     if Member.last
