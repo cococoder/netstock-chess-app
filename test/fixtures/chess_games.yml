@@ -37,9 +37,7 @@ draw:
   white_player_id: 5
   draw: true
 
-
-
 draw_adjacent:
-  black_player_id: 2
-  white_player_id: 1
-  winner_id:
+  black_player_id: 1
+  white_player_id: 2
+  draw: true

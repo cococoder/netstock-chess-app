@@ -59,6 +59,9 @@ class ChessGame < ApplicationRecord
 
     if draw == true
 
+      return if black_player.adjacent_below == white_player
+      return if black_player.adjacent_above == white_player
+
       lowest_rank_player.premote!
       Member.reorder_from lowest_rank_player
 

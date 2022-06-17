@@ -48,6 +48,15 @@ class ChessGameTest < ActiveSupport::TestCase
 
   end
 
+  test 'Draw - nothing happens when adjacent' do
+    game = chess_games(:draw_adjacent)
+    game.change_rankings
+    lowest_rank_player = game.lowest_rank_player
+    Member.first(10).each{|m| puts m}
+    refute(lowest_rank_player.to_s.include? "- (1st) - 2nd")
+
+  end
+
 
 
   test "LoweRankedWin 1 and 9" do
