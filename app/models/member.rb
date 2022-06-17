@@ -50,6 +50,14 @@ class Member < ApplicationRecord
     self.update previous_rank: self.rank, rank: new_rank
   end
 
+  def ranked_first?
+    self == Member.first
+  end
+
+  def ranked_last?
+    self == Member.last
+  end
+
   def record_rank_change
     RankChange.create member: self, previous: previous_rank, current: self.rank
   end

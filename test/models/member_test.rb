@@ -31,10 +31,19 @@ class MemberTest < ActiveSupport::TestCase
   end
 
   test "move to rank!" do
-
     member = members(:member_3)
     member.move_to new_rank: 1
     assert_equal 3,member.previous_rank
     assert_equal 1,member.rank
   end
+
+  test "ranked_first?" do
+    member = members(:member_1)
+    assert member.ranked_first?
+  end
+  test "ranked_last?" do
+    member = members(:member_100)
+    assert member.ranked_last?
+  end
+
 end
